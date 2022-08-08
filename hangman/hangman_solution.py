@@ -65,8 +65,14 @@ class Hangman:
         if letter in list(self.word):
             self.word_guessed[list(self.word).index(letter)] = letter
             self.num_letters -= 1
+            print(f"'Nice! {letter} is in the word!")
+            print(self.word_guessed)
+
         elif letter not in list(self.word):
+            self.list_letters.append(letter)
             self.num_lives -= 1
+            print(f"Sorry, {letter} is not in the word")
+            print(f"You have {self.num_lives} lives left")
 
     def ask_letter(self):
         '''
