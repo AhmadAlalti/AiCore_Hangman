@@ -91,7 +91,7 @@ class Hangman:
                 self.list_letter.append(lower(letter))
                 break
 
-        # TODO 3: If the letter is valid, call the check_letter method
+        letter.checkletter(letter)
 
 def play_game(word_list):
     # As an aid, part of the code is already provided:
