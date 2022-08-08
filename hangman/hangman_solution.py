@@ -50,7 +50,7 @@ class Hangman:
         print(f"The mystery word has {len(self.word)} characters")
         print(self.word_guessed)
 
-    def check_letter(self, letter) -> None:
+    def check_letter(self, letter):
         '''
         Checks if the letter is in the word.
         If it is, it replaces the '_' in the word_guessed list with the letter.
@@ -62,12 +62,11 @@ class Hangman:
             The letter to be checked
 
         '''
-        # TODO 3: Check if the letter is in the word. TIP: You can use the lower() method to convert the letter to lowercase
-        # TODO 3: If the letter is in the word, replace the '_' in the word_guessed list with the letter
-        # TODO 3: If the letter is in the word, the number of UNIQUE letters in the word that have not been guessed yet has to be reduced by 1
-        # TODO 3: If the letter is not in the word, reduce the number of lives by 1
-        # Be careful! A word can contain the same letter more than once. TIP: Take a look at the index() method in the string class
-        pass
+        if letter in list(self.word):
+            self.word_guessed[list(self.word).index(letter)] = letter
+            self.num_letters -= 1
+        elif letter not in list(self.word):
+            self.num_lives -= 1
 
     def ask_letter(self):
         '''
@@ -89,7 +88,7 @@ class Hangman:
                 print(f"{letter} was already tried")
                     
             else:
-                self.list_letter.append(letter)
+                self.list_letter.append(lower(letter))
                 break
 
         # TODO 3: If the letter is valid, call the check_letter method
