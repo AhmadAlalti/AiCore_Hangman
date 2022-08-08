@@ -41,11 +41,14 @@ class Hangman:
         Asks the user for a letter.
     '''
     def __init__(self, word_list, num_lives=5):
-        # TODO 2: Initialize the attributes as indicated in the docstring
-        # TODO 2: Print two message upon initialization:
-        # 1. "The mystery word has {len(self.word)} characters" (The number of letters is NOT the UNIQUE number of letters)
-        # 2. {word_guessed}
-        pass
+        self.word = random.choice(word_list)
+        self.word_guessed = [len(list(self.word)) * ["_"]]
+        self.num_letters = len(list(self.word))
+        self.num_lives = num_lives
+        self.list_letters = []
+
+        print(f"The mystery word has {len(self.word)} characters")
+        print(self.word_guessed)
 
     def check_letter(self, letter) -> None:
         '''
@@ -73,21 +76,28 @@ class Hangman:
         2. If the character is a single character
         If it passes both checks, it calls the check_letter method.
         '''
-        print("Let's Go! Please enter your letter")
+        print("Let's play! Please enter your letter")
+
+        letter = input()
+
         while True:
-            letter = input()
             if len(letter) > 1:
                 print("Please, enter just one character")
+                letter = input()
+
+            elif letter in self.list_letter:
+                print(f"{letter} was already tried")
+                    
             else:
+                self.list_letter.append(letter)
                 break
-        # TODO 2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
+
         # TODO 3: If the letter is valid, call the check_letter method
 
 def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
     game.ask_letter()
-    # TODO 2: To test this task, upon initialization, two messages should be printed 
     # TODO 3: To test this task, you call the ask_letter method and check if the letter is in the word
     
     # TODO 4: Iteratively ask the user for a letter until the user guesses the word or runs out of lives
