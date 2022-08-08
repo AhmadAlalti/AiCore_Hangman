@@ -88,13 +88,12 @@ class Hangman:
                 print(f"{letter} was already tried")
                     
             else:
-                self.list_letter.append(lower(letter))
+                self.list_letter.append(str.lower(letter))
                 break
 
         letter.checkletter(letter)
 
 def play_game(word_list):
-    # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
     game.ask_letter()
     # TODO 3: To test this task, you call the ask_letter method and check if the letter is in the word
