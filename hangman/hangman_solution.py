@@ -1,4 +1,3 @@
-from os import set_blocking
 import random
 
 class Hangman:
@@ -14,8 +13,7 @@ class Hangman:
         print(self.word_guessed)
 
     def check_letter(self, letter):
-        letter = letter.lower()
-
+        
         if letter in list(self.word):
             self.list_letters.append(letter)
             for i in range(0, len(self.word)):
@@ -35,6 +33,7 @@ class Hangman:
 
         while True:
             letter = input("Please enter your letter: ")
+            letter = letter.lower()
             if len(letter) != 1:
                 print("Please, enter just one character")
 
