@@ -1,8 +1,83 @@
+from dis import dis
 import random
+
+def display_hangman(num_lives):
+    stages = [  # final state: head, torso, both arms, and both legs
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |     / \\
+                   -
+                """,
+                # head, torso, both arms, and one leg
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |     / 
+                   -
+                """,
+                # head, torso, and both arms
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |      
+                   -
+                """,
+                # head, torso, and one arm
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|
+                   |      |
+                   |     
+                   -
+                """,
+                # head and torso
+                """
+                   --------
+                   |      |
+                   |      O
+                   |      |
+                   |      |
+                   |     
+                   -
+                """,
+                # head
+                """
+                   --------
+                   |      |
+                   |      O
+                   |    
+                   |      
+                   |     
+                   -
+                """,
+                # initial empty state
+                """
+                   --------
+                   |      |
+                   |      
+                   |    
+                   |      
+                   |     
+                   -
+                """
+    ]
+    return stages[num_lives]
 
 class Hangman:
 
-    def __init__(self, word_list, num_lives=5):
+    def __init__(self, word_list, num_lives=6):
         self.word = random.choice(word_list)
         self.word_guessed = len(self.word) * ["_"]
         self.num_letters = len(set(self.word))
@@ -10,6 +85,7 @@ class Hangman:
         self.list_letters = []
 
         print(f"The mystery word has {len(self.word)} characters")
+        print(display_hangman(num_lives))
         print(self.word_guessed)
 
     def check_letter(self, letter):
@@ -28,6 +104,7 @@ class Hangman:
             self.num_lives -= 1
             print(f"Sorry, {letter} is not in the word")
             print(f"You have {self.num_lives} lives left")
+            print(display_hangman(self.num_lives))
 
     def ask_letter(self):
 
@@ -45,7 +122,7 @@ class Hangman:
                 break
         
 def play_game(word_list):
-    game = Hangman(word_list, num_lives=5)
+    game = Hangman(word_list, num_lives=6)
     while True:
         game.ask_letter()
         
